@@ -1,0 +1,26 @@
+@import "../../util/mixins";
+
+
+.login {
+  @include box-styles;
+
+  &-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    input {
+      padding: 10px 5px;
+      outline: none;
+      border-radius: 15px;
+      border: 1px solid #333;
+    }
+    button {
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 15px;
+      border: 1px solid #333;
+    }
+  }
+}
