@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
 import './styles.scss'
 import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {addUser} from "../../redux/users/userSlice";
+
 const Index = () => {
+  const dispatch = useDispatch()
   let navigate = useNavigate()
   const [name, setName] = useState<string>('')
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const register = (e: React.MouseEvent<HTMLElement>) => {
+    dispatch(addUser({
+      name,
+      username,
+      password
+    }))
     e.preventDefault()
     navigate('/')
   }
