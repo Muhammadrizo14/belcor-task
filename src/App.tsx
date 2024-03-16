@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useNavigation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./redux/store";
 import {changeOption} from "./redux/users/userSlice";
@@ -8,7 +8,13 @@ import {changeOption} from "./redux/users/userSlice";
 function App() {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    if (!user.status) {
+      navigate('/login')
+    }
+  }, []);
 
 
   return (

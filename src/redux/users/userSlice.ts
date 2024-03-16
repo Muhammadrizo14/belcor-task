@@ -6,12 +6,14 @@ export interface UsersState {
   username: string,
   password: string,
   option?: number
+  status?: boolean
 }
 
 const initialState: UsersState = {
-  name: '',
-  username: '',
-  password: '',
+  name: 'admin',
+  username: 'admin',
+  password: 'admin',
+  status: false
 }
 
 export const userSlice = createSlice({
@@ -22,14 +24,18 @@ export const userSlice = createSlice({
       state.name = action.payload.name
       state.username = action.payload.username
       state.password = action.payload.password
+      state.status = action.payload.status
     },
     changeOption: (state, action: PayloadAction<number>) => {
       state.option = action.payload
+    },
+    loginUser: (state) => {
+      state.status = true
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {addUser, changeOption} = userSlice.actions
+export const {addUser, changeOption, loginUser} = userSlice.actions
 
 export default userSlice.reducer

@@ -11,16 +11,19 @@ const Index = () => {
     <div>
       Here you start your tests you picked option {user.option}
 
-      {exam.map((qu,i)=> (
+      {exam.map((qu, i) => (
         <div key={i}>
           <h4>{qu.question}</h4>
-          {qu.answer.map((option, i)=> (
-            <div>
-              {option.options.optionLetter}) {option.options.option}
-            </div>
+          {qu.options.map((option, i) => (
+            <button key={i}>
+              {option.optionLetter}) {option.option}
+            </button>
           ))}
         </div>
       ))}
+      <br/>
+      <br/>
+      <button>get results</button>
     </div>
   );
 };

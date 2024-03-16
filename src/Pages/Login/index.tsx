@@ -1,16 +1,25 @@
 import React, {useState} from 'react';
 import './styles.scss'
 import {Link, useNavigate} from "react-router-dom";
+import {addUser, loginUser} from "../../redux/users/userSlice";
+import {useDispatch} from "react-redux";
 const Index = () => {
   let navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<boolean>(false)
 
-  const register = (e: React.MouseEvent<HTMLElement>) => {
+  const login = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    navigate('/')
-
+    setUsername('')
+    setPassword('')
+    if (username === 'admin' && password === 'admin') {
+      dispatch(loginUser())
+      navigate('/')
+    } else {
+      setError(true)
+    }
   }
 
   return (
@@ -26,9 +35,11 @@ const Index = () => {
           type="text"
           placeholder='password'
           onChange={(e) => setPassword(e.target.value)}
-
         />
-        <button type='submit' onClick={(e) => register(e)}>Login</button>
+        {error && (
+          <p style={{color: 'red'}}>incorrect username or password</p>
+        )}
+        <button type='submit' onClick={(e) => login(e)}>Login</button>
         <Link to='/register'>Do not have an account?</Link>
       </form>
     </div>

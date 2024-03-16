@@ -15,7 +15,8 @@ const Index = () => {
     dispatch(addUser({
       name,
       username,
-      password
+      password,
+      status: true
     }))
     e.preventDefault()
     navigate('/')
