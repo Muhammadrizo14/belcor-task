@@ -1,0 +1,42 @@
+@import "../../util/mixins";
+
+.exam__wrap {
+  .exam {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    @include box-styles;
+    width: 600px;
+    &__options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 30px;
+      grid-column-gap: 10px;
+      margin-bottom: 30px;
+      .option{
+        cursor: pointer;
+        border: 1px solid #333;
+      }
+      .active {
+        box-shadow: 0 0 10px 10px rgba(51, 51, 51, 0.29);
+
+      }
+    }
+  }
+  .results {
+    @include box-styles;
+    justify-content: flex-start;
+    width: 80%;
+    height: auto;
+    max-height: 60%;
+    text-align: left;
+    .error {
+      color: red;
+    }
+    .correct {
+      color: green;
+    }
+  }
+}

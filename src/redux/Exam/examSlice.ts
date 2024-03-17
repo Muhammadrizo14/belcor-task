@@ -133,7 +133,6 @@ const initialState: ExamState[] = [
     userAnswer: "",
     status: undefined,
   },
-  // Add more questions here...
 ];
 
 
@@ -141,7 +140,15 @@ export const ExamSlice = createSlice({
   name: 'exam',
   initialState,
   reducers: {
-    answerTo: (state, action: PayloadAction<ExamState>) => {
+    answerTo: (state, action: PayloadAction<{ pickedOption: string, counter: number }>) => {
+      let {counter,pickedOption} = action.payload
+      if (state[counter].correctAnswer === pickedOption) {
+        state[counter].userAnswer = pickedOption
+        state[counter].status = true
+      } else {
+        state[counter].userAnswer = pickedOption
+        state[counter].status = false
+      }
 
     },
   },

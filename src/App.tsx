@@ -4,6 +4,7 @@ import {Link, useNavigate, useNavigation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./redux/store";
 import {changeOption} from "./redux/users/userSlice";
+import Header from "./Components/Header";
 
 function App() {
   const user = useSelector((state: RootState) => state.user)
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Welcome {user.name}!</h1>
+      <Header/>
       <h1>Choose your option</h1>
       <Link to='exam' onClick={()=> dispatch(changeOption(1))}>first option</Link>
       <Link to='exam' onClick={()=> dispatch(changeOption(2))}>second option</Link>

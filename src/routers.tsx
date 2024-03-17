@@ -5,6 +5,7 @@ import Register from "./Pages/Register";
 import App from "./App";
 import Login from "./Pages/Login";
 import Exam from "./Pages/Exam";
+import Data from "./Pages/Data";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "exam",
     element: <Exam/>,
+  },
+  {
+    path: "data",
+    element: <Data/>,
   },
 ]);
 
