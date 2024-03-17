@@ -1,6 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
 
+const user = JSON.parse(localStorage.getItem('username')!)
+
 export interface UsersState {
   name: string,
   username: string,
@@ -10,10 +12,10 @@ export interface UsersState {
 }
 
 const initialState: UsersState = {
-  name: 'admin',
-  username: 'admin',
-  password: 'admin',
-  status: false
+  name:  user.name || 'admin',
+  username: user.username ||'admin',
+  password: user.password || 'admin',
+  status: user.status || false
 }
 
 export const userSlice = createSlice({
@@ -21,16 +23,21 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action: PayloadAction<UsersState>) => {
-      state.name = action.payload.name
-      state.username = action.payload.username
-      state.password = action.payload.password
-      state.status = action.payload.status
+      const { name, username, password, status } = action.payload;
+      state.name = name;
+      state.username = username;
+      state.password = password;
+      state.status = status;
+      localStorage.setItem('username', JSON.stringify(state))
+      localStorage.setItem('status', 'true')
     },
     changeOption: (state, action: PayloadAction<number>) => {
       state.option = action.payload
+      localStorage.setItem('option', JSON.stringify(action.payload))
     },
     loginUser: (state) => {
       state.status = true
+      localStorage.setItem('status', 'true')
     },
   },
 })

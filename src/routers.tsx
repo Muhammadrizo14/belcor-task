@@ -9,16 +9,16 @@ import Data from "./Pages/Data";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <App/>,
+  },
+  {
     path: "/register",
     element: <Register/>,
   },
   {
     path: "/login",
     element: <Login/>,
-  },
-  {
-    path: "/",
-    element: <App/>,
   },
   {
     path: "exam",

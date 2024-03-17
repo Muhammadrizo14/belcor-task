@@ -8,12 +8,11 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
 function App() {
-  const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!user.status) {
+    if (localStorage.getItem('status') !== 'true') {
       navigate('/login')
     }
   }, []);

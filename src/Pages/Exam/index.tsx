@@ -4,6 +4,8 @@ import {RootState} from "../../redux/store";
 import {useNavigate} from "react-router-dom";
 import './styles.scss'
 import {answerTo} from "../../redux/Exam/examSlice";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
 const Index = () => {
   const exam = useSelector((state: RootState) => state.exam);
   const user = useSelector((state: RootState) => state.user);
@@ -14,9 +16,10 @@ const Index = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
   useEffect(() => {
-    if (!user.status) {
-      navigate('/login');
+    if (localStorage.getItem('status') !== 'true') {
+      navigate('/login')
     }
   }, []);
 
@@ -46,7 +49,8 @@ const Index = () => {
 
   return (
     <div className='exam__wrap'>
-      <h1>Here you start your tests, you picked option {user.option}</h1>
+      {results && <Header/>}
+      <h1>Here you start your tests, you picked option {localStorage.getItem('option')}</h1>
 
 
       {!results ? <div className='exam'>
@@ -68,11 +72,13 @@ const Index = () => {
         {exam.map((que, i) => (
           <div key={i} className={`${que.status ? 'correct' : 'error'}`}>
             <h3>{i + 1}) {que.question}</h3>
-            <p>Correct answer was <span style={{textTransform: "uppercase"}}>{que.correctAnswer}</span> and you answered <span style={{textTransform: "uppercase"}}>{que.userAnswer}</span></p>
+            <p>Correct answer was <span style={{textTransform: "uppercase"}}>{que.correctAnswer}</span> and you
+              answered <span style={{textTransform: "uppercase"}}>{que.userAnswer}</span></p>
           </div>
         ))}
       </div>}
 
+      {results && <Footer/>}
 
     </div>
   );
